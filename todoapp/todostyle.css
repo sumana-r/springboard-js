@@ -1,0 +1,16 @@
+.center{
+    
+    padding-left: 45%;
+}
+#wish-list{
+   list-style: none;
+   
+
+}
+#wish-list li input{
+    padding-right: 10px;
+}
+
+.striketext {
+    text-decoration: line-through;
+  }
