@@ -1,0 +1,53 @@
+#game div {
+  border: 1px solid black;
+  width: 15%;
+  height: 200px;
+  margin: 10px;
+  display: inline-block;
+}
+.orange.selected{
+ background-color: orange; 
+ } 
+
+.purple.selected{
+  background-color: purple;
+}
+.red.selected{
+  background-color: red;
+}
+.green.selected{
+  background-color: green;
+}
+.blue.selected{
+  background-color: blue;
+} 
+#clickhold{
+  pointer-events: none;
+
+}
+
+.orange.matched{
+  background-color: orange; 
+  } 
+ 
+ .purple.matched{
+   background-color: purple;
+ }
+ .red.matched{
+   background-color: red;
+ }
+ .green.matched{
+   background-color: green;
+ }
+ .blue.matched{
+   background-color: blue;
+ } 
+ .clickhold{
+   pointer-events: none;
+ 
+ }
+ #game-score{
+  text-decoration-color: red;
+  padding-bottom: 20px;
+  ;
+ }
