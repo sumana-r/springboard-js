@@ -1,0 +1,28 @@
+                    Git Repo Exercise Part I
+                    
+
+
+## Create a local repository and add and commit some files
+    mkdir testrepos             
+    cd testrepos
+    mkdir dom-copy  
+    added sample files
+    git init
+    git status
+    git add dom-copy/
+    git status
+    git commit -m "Test repo"
+
+## Create a remote repository and push your code from the local repo to the remote
+    new repository => added repository name in public mode and created repository 
+    copied "git remote add origin "git@github.com:sumana-r/testrepos.git" and pasted in terminal.
+    pushed the files using "git push origin main"  command.
+
+## Create a local branch and add and commit some files
+    git checkout -b testbranch
+    git add testbranch.html 
+    git status
+    git commit -m "Create test branch"      
+
+## Push that local branch to GitHub to create a remote branch
+git push origin testbranch 
