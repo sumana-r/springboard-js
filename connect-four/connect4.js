@@ -36,7 +36,7 @@ function makeHtmlBoard() {
   top.setAttribute("id", "column-top");
   // calling the function handleClick by clicking the row with the id is column-top
   top.addEventListener("click", handleClick);
-
+  
   for (var x = 0; x < WIDTH; x++) {
     var headCell = document.createElement("td");
     headCell.setAttribute("id", x);
@@ -45,6 +45,10 @@ function makeHtmlBoard() {
   htmlBoard.append(top);
 
   // TODO: add comment for this code
+  //create the html board with the help of height and width to design rows and columns in html
+  // set the attribute value of cell is x,y
+  //append the cell attribute in corresponding element
+  // append all the rows in html board
   for (var y = 0; y < HEIGHT; y++) {
     const row = document.createElement("tr");
     for (var x = 0; x < WIDTH; x++) {
@@ -60,7 +64,7 @@ function makeHtmlBoard() {
 
 function findSpotForCol(x) {
   // TODO: write the real version of this, rather than always returning 0
-  // get the board array length and assign length value -1 as board index 
+  // get the board array length and assign (length value - 1) as board index 
   // to find row value using column value(x)
   for (let row = board.length - 1; row >= 0; row--) {
     if (!board[row][x]) {
@@ -146,9 +150,9 @@ function checkForWin() {
   }
 
   // TODO: read and understand this code. Add comments to help you.
-  //  iterate the row and column of the array  in the loop 
-  // get the horizontal,vertical, diagonal value in separate global array
-  // check if each horiz, vert, diagDR, diagDl passing into the -win function
+  //  For loop  iterate the row and column of the array using HEIGHT and WIDTH
+  // get the horizontal,vertical, diagonal value in horiz, vert, diagDR, DiagDL array
+  // check if horiz, vert, diagDR, diagDl parameters are passing to the -win function
   // return true if any one condition is true
   
 
