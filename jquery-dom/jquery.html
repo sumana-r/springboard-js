@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+   <head>
+        <title></title>   
+    </head>
+    <style>
+        body {
+          background-image: url('../jquery-dom/movie-review.jpeg');
+          background-position: center;
+          background-repeat: no-repeat;
+          background-size: cover;
+        }
+        .label {
+            color: white;
+            padding: 8px;
+            font-family: Arial;
+        }
+        .divcntnr{
+            text-align: center;
+        }
+        .h1{
+            color: white;
+            padding: 8px;
+            font-family: Arial;
+            text-align: center;
+        }
+        body, html {
+            height: 100%;
+        }
+        table{
+            text-align: center;
+            color: white;
+            font-size: 25px;
+            font-family: Arial;
+            text-align: center;
+            padding-top: 5%;
+            
+        }
+        .table-control{
+            width: 20%;
+        }
+     </style>
+    
+    <body>
+        <form id="movieform">
+            <h1 class="h1">Moview Review</h1>
+        <div class="divcntnr">
+            <label class="label">Movie Title</label>
+            <input class="form-control" type="name" id="title" pattern="[a-zA-Z]{2,*}"></input>
+            <label class="label">Rating</label>
+            <input class="form-control" type="number" id="rating" pattern="[0-10]"></input>
+            <button id="submitBtn">submit</button>
+            
+        </div>
+        <div><table id="movietable">
+            <tr>
+                <td class="table-control">Movie Title</td>
+                <td class="table-control">Movie rating</td>
+                <td class="table-control"></td>
+            </tr>
+
+        </table></div>
+       
+    </body>
+   <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="app.js"> </script>
+       
+   
+</form>    
+</html>
