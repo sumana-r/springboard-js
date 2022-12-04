@@ -1,0 +1,24 @@
+/* some colors you may find useful:
+  #115ff4
+  #060ce9
+  #28a200
+  #8d2ab5
+  #74119c
+*/
+.jeopardy-bgcolor{
+  background-color:#115ff4;
+}
+table thead td{
+    height: 50px;
+    width: 500px;
+    text-align: center;
+    color: white;
+    font-size: small;
+}
+table tbody td{
+  height: 80px;
+  width: 500px;
+  text-align: center;
+  color: white;
+  font-size: small;
+}
