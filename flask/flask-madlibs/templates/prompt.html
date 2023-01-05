@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}Madlibs{% endblock %}
+
+{% block content %}
+<form action="/story">
+    <div>
+        <table>
+            <!-- ['place','noun', 'verb'] -->
+            {% for prompt in prompts %}
+            <tr>
+                <td> {{prompt}}:</td>
+                <td><input type="text" name="{{prompt}}"> </td>
+            </tr>
+            {% endfor %}
+            <tr>
+                <td></td>
+                <td><button type="submit" name="submitbtn">Submit</button></td>
+            </tr>
+
+
+        </table>
+
+    </div>
+</form>
+  
+
+{% endblock %}
