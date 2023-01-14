@@ -1,0 +1,39 @@
+td {
+  border: 1px solid black;
+  height: 50px;
+  width:50px;
+  background-color: bisque; 
+  text-align: center;
+}
+.boardtable{
+  
+  height: 40%;
+  
+}
+.correct {
+  box-shadow: 1px 1px 3px rgb(0 0 0 / 0%), inset 0 0 20px;
+  width: 30%;
+  height: 40%;
+  float: left;
+  overflow: hidden;
+  background: #1ab1aa;
+  position: relative;
+  display: table-cell;
+  vertical-align: top;
+}
+.wrong {
+  background: #fa6f57;
+  position: relative;
+  width: 30%;
+  height: 40%;
+  
+  display: table-cell;
+  vertical-align: top;
+}
+.selected{
+  background:gray;
+}
+#newword{
+  background-color: gray;
+  color: white;
+}

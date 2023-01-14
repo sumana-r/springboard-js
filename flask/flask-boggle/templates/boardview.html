@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block title %}{% endblock %}
+
+{% block content %}
+<div><label>Timer:</label>
+    <span id="timer">  60</span>
+    <button type ="button" id="gamestart" name="startgame"> Game Start</button>
+    
+    
+   </div> <br>
+    
+
+
+ <div id="game" class="boardtable">
+    <table id="board" >
+        {%for row in board%}
+        <tr class="boardstyle">
+            {% for col in row %}
+            <td class="unselect">{{col}}</td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+    </table>
+  </div> <br>
+
+ 
+
+<div>
+    <form id="checkWord" action="/addWord" method="post">
+        <button type="submit" name="add_word" >Add Word</button>
+        <input type="text" id="newword" name="word" readonly ></input>
+        
+    </form><br>
+    <br>
+
+    <label style="width: 40px;">Score &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+    <input type="number" id="scoreid" name="score" readonly value="{{score}}"  ></input><br><br>
+    <label style="width: 40px;">High Score</label>
+    <input type="number" id="highscore-id" name="highscore" readonly value="{{highscore}}" ></input><br>
+      
+</div>
+
+
+{% endblock %}
