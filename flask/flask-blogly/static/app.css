@@ -1,0 +1,13 @@
+#editbtn{
+    background-color: lightskyblue;
+    width: 60px;
+}
+#dltbtn{
+    background-color: red;
+    width: 60px;
+}
+
+#profileimg{
+    width: 150px;
+    height: 150px;
+}

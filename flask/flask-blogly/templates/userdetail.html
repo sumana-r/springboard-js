@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}New User Form{% endblock %}
+
+{% block content %}
+<form  action="/users/{{user.id}}/delete" method="post">
+<div>
+   <img src="{{user.image_url}}" id="profileimg"/>
+   <h2> {{user.first_name + " " + user.last_name }}</h2>
+   <a href="/users/{{user.id}}/edit"><button type = "button" id="editbtn">Edit</button></a>
+   <button type = "submit" id="dltbtn">Delete</button>
+
+</div>
+   
+</form>
+
+{% endblock %}
