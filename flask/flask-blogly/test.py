@@ -1,12 +1,36 @@
 from unittest import TestCase
 from app import app
+from models import db, User, UserService
+
+# Use test database and don't clutter tests with SQL
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///sqla_intro_test'
+app.config['SQLALCHEMY_ECHO'] = False
+
+# Make Flask errors be real errors, rather than HTML pages with error info
+app.config['TESTING'] = True
+
+# This is a bit of hack, but don't use Flask DebugToolbar
+app.config['DEBUG_TB_HOSTS'] = ['dont-show-debug-toolbar']
+
+db.drop_all()
+db.create_all()
 
 
 
-class BloglyTestCase(TestCase):
+class UserListTestCase(TestCase):
+    """Tests for views for Pets."""
+
     def setUp(self):
-            self.client = app.test_client()
-            app.config['TESTING'] = True
+        """Add sample pet."""
+
+        User.query.delete()
+
+        user = User(first_name='Nancy', last_name="John", image_url="https://www.pngfind.com/pngs/m/470-4703547_icon-user-icon-hd-png-download.png")
+        db.session.add(user)
+        db.session.commit()
+        self.user_id = user.id
+        self.client = app.test_client()
+        app.config['TESTING'] = True
             
 
     def test_home_page(self):
@@ -39,7 +63,7 @@ class BloglyTestCase(TestCase):
        
        with  self.client :
             sent = {"fname":"FTest1","lname":"LTest1","image":"https://www.pngfind.com/pngs/m/470-4703547_icon-user-icon-hd-png-download.png"}
-            resp = self.client.post(f"/users/{18}/delete",data = sent, follow_redirects=True)
+            resp = self.client.post(f"/users/{self.user_id}/delete",data = sent, follow_redirects=True)
             self.assertEqual(resp.status_code,200)
             
             
