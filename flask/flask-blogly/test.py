@@ -1,6 +1,7 @@
 from unittest import TestCase
 from app import app
-from models import db, User, UserService
+from models import db, User, Post
+from datetime import date
 
 # Use test database and don't clutter tests with SQL
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///sqla_intro_test'
@@ -64,6 +65,29 @@ class UserListTestCase(TestCase):
        with  self.client :
             sent = {"fname":"FTest1","lname":"LTest1","image":"https://www.pngfind.com/pngs/m/470-4703547_icon-user-icon-hd-png-download.png"}
             resp = self.client.post(f"/users/{self.user_id}/delete",data = sent, follow_redirects=True)
+            self.assertEqual(resp.status_code,200)
+
+
+class PostTestCase(TestCase):
+    """Tests for views for Pets."""
+
+    def setUp(self):
+        """Add sample pet."""
+
+        Post.query.delete()
+
+        post = Post(title='test title', content="test content", created_at = date.today(), user_id =100)
+        db.session.add(post)
+        db.session.commit()
+        self.post_id = post.id
+        self.client = app.test_client()
+        app.config['TESTING'] = True
+
+    def test_addedpost_page(self):
+       
+       with  self.client :
+            sent = {"title":"test title", "content":"test content", "created_at" : date.today(), "user_id":101}
+            resp = self.client.post(f'/users/{self.user_id}/posts/new',data = sent, follow_redirects=True)
             self.assertEqual(resp.status_code,200)
             
             

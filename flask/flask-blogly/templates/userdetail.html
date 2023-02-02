@@ -4,12 +4,23 @@
 
 {% block content %}
 <form  action="/users/{{user.id}}/delete" method="post">
-<div>
-   <img src="{{user.image_url}}" id="profileimg"/>
+    <div class="profilepic"> <img src="{{user.image_url}}" id="profileimg"/></div>
+   
+<div class="profile">
    <h2> {{user.first_name + " " + user.last_name }}</h2>
    <a href="/users/{{user.id}}/edit"><button type = "button" id="editbtn">Edit</button></a>
    <button type = "submit" id="dltbtn">Delete</button>
-
+    <h2>Post </h2>
+    <ul>
+        {% for p in post%}
+        <li>
+            <!-- {{p.title}} -->
+           <a href="/posts/{{p.id}}" >{{p.title}}</a>  
+           {{post.title }} 
+        </li>
+        {%endfor%}
+    </ul>
+    <a href="/users/{{user.id}}/posts/new"><button name="addpost" type="button">Add Post</button></a>
 </div>
    
 </form>

@@ -3,6 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
 
+
 def connect_db(app):
     db.app =  app
     app.app_context().push()
@@ -11,7 +12,7 @@ def connect_db(app):
 
 class User(db.Model):
     
-    __tablename__ = "User"
+    __tablename__ = "user"
 
     def __repr__(self):
         return f"self.id, self.first_name, self.last_name, self.image_url"
@@ -24,6 +25,7 @@ class User(db.Model):
     last_name = db.Column(db.String(20),
                      nullable=False)
     image_url = db.Column(db.Text, nullable=True)
+    post = db.relationship('Post', backref='users')
 
     
 class UserService():
@@ -46,6 +48,48 @@ class UserService():
         delete_user = User.query.get(id)
         db.session.delete(delete_user)
         db.session.commit()
+
+class Post(db.Model):
+    
+    __tablename__ = "post"
+
+    id = db.Column(db.Integer,
+                   primary_key=True,
+                   autoincrement=True)
+    title = db.Column(db.String(30),
+                     nullable=False)
+    content = db.Column(db.Text, nullable=False)
+    created_at = db.Column(db.DateTime, 
+                     nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+
+class PostService():
+    def save_post(post:Post):
+        db.session.add(post)
+        db.session.commit()
+
+    def get_userpost_detail(user_id):
+        return  Post.query.filter_by(user_id = user_id).all()
+
+    def get_post(post_id):
+        return  Post.query.get(post_id)
+
+    def delete_post(post_id):
+        delete_post = Post.query.get(post_id)
+        db.session.delete(delete_post)
+        db.session.commit()
+
+    def update_post(post:Post):
+        edit_post = Post.query.get(post.id)
+        edit_post.title = post.title
+        edit_post.content = post.content
+        edit_post.created_at = post.created_at
+        edit_post.user_id = post.user_id
+        db.session.add(edit_post)
+        db.session.commit()
+
+
+
 
         
         
