@@ -10,8 +10,17 @@
     <input name = "title" type = "text" value ="{{post.title}}" /><br><br>
     <label>Content</label><br>
     <input name = "content" type = "text" value ="{{post.content}}"/><br><br>
+    {% for tag in tags%}
+    
+    <input type="checkbox" name="tagid" value="{{tag.id}}"{{'checked'  if tag.selected else ''}}/>
+   
+    <label>{{tag.name}}</label><br>
+   
+    {% endfor %}
     <button name="editedpost" type="submit">Submit</button>
 </div>
 </form>
 
 {% endblock %}
+
+

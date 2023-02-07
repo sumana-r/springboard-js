@@ -10,6 +10,11 @@
     <input name = "ptitle" type = "text"/><br><br>
     <label>Content</label><br>
     <input name = "pcontent" type = "text" /><br><br>
+    {% for tag in tags%}
+    <input type="checkbox" name="tagid" value="{{tag.id}}"/>
+    <label>{{tag.tagname}}</label><br>
+    {% endfor %}
+    <br>
     <button name="postcancel" type="button">Cancel</button>
     <button name="addpost" type="submit">Add</button>
 </div>

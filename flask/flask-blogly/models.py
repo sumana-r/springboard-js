@@ -62,11 +62,15 @@ class Post(db.Model):
     created_at = db.Column(db.DateTime, 
                      nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    
 
 class PostService():
     def save_post(post:Post):
         db.session.add(post)
         db.session.commit()
+
+    def get_allpost():
+        return  Post.query.all()
 
     def get_userpost_detail(user_id):
         return  Post.query.filter_by(user_id = user_id).all()
@@ -88,10 +92,51 @@ class PostService():
         db.session.add(edit_post)
         db.session.commit()
 
+class Tag(db.Model):
+    
+    __tablename__ = "tag"
+
+    id = db.Column(db.Integer,
+                   primary_key=True,
+                   autoincrement=True)
+    tagname = db.Column(db.Text,
+                     nullable=False, unique=True)
+                     
+    posts = db.relationship('Post', secondary = 'post_tag', backref='tag')
+   
+
+class PostTag(db.Model):
+    
+    __tablename__ = "post_tag"
+
+    postid = db.Column(db.Integer,
+                       db.ForeignKey("post.id"),
+                       primary_key=True)
+    tagid = db.Column(db.Integer,
+                          db.ForeignKey("tag.id"),
+                          primary_key=True)
+    
+    
+
+class TagService():
+    def save_tag(tag:Tag):
+        db.session.add(tag)
+        db.session.commit()
+
+    def get_alltags():
+        return  Tag.query.all() 
+
+    def get_a_tag(tag_id):
+        return  Tag.query.get(tag_id)
+    
+    def update_tag(tag:Tag):
+        edit_tag = Tag.query.get(tag.id)
+        edit_tag.tagname = tag.tagname
+        db.session.add(edit_tag)
+        db.session.commit()
 
 
-
-        
+    
         
         
         
