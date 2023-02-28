@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %} Pet Adoption {% endblock %}
+
+{% block content %}
+    <form action="/add" method="POST">
+        <h1>Pets</h1>
+        {% for pet in pets%}
+            {% if pet.available %}
+                <div class="container">
+                    <div class="">
+                        <img class="img-thumbnail" src={{pet.photo_url}} />
+                        <p><span class="text-info">{{pet.name}}</span> <b>is available!</b> </p>
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+        <button class="btn  btn-success  btn-lg" type="submit">Add Pet</button>
+    </form>
+{% endblock %}

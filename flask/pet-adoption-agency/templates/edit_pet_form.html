@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block title %} Pet Adoption {% endblock %}
+    <style>
+        html,
+        body {
+            height: 100%;
+        }
+    </style>
+{% block content %}
+<div class="container">
+    <h2 class="text-center">{{ pet.name }} </h2>
+        <h5 class="text-center">The species is {{pet.species}}.
+            {% if pet.age %}
+                <p>Age is {{pet.age}}</p>
+            {% endif %}
+        </h5> 
+    
+    {% if pet.photo_url %}
+        <img class="img-fluid" src="{{ pet.photo_url }}">
+    {% endif %}
+
+    <div class="d-flex justify-content-center align-items-center">
+        <div class="col-md-8">
+            {% for msg in get_flashed_messages() %}
+                 <div>{{ msg }}</div>
+            {% endfor %}
+            <form id="pet-add-form" method="POST">
+            {{ form.hidden_tag() }} <!--add type=hidden form fields -->
+            {% for field in form
+                if field.widget.input_type != 'hidden' %}
+                    <div class="form-group row">
+                        <div class="col-sm-2 col-form-label">{{ field.label }}</div>
+                        <div class="col-sm-10">
+                                 {{ field }}
+                                 {% for error in field.errors %}
+                                    <p class="text-break">{{ error }}</>
+                                {% endfor %}
+                        </div>
+                    </div>
+            {% endfor %}
+            <div class="offset-md-3">
+                <button class="btn  btn-primary  btn-lg" type="submit">Update</button>
+            </div>
+            </form>
+            
+           
+        </div>
+    </div>
+</div>
+{% endblock %}
