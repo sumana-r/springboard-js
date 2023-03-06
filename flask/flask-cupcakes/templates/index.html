@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block title %} Cupcakes {% endblock %}
+
+{% block content %}
+   
+    <h1 class="d-flex justify-content-center align-items-center">Cupcakes</h1>
+    <ul>
+        {% for cupcake in cupcakes%}
+            {% if cupcake.available %}
+            <div class="container">
+                <div class="">
+                    <img class="img-thumbnail" src={{cupcake.image}} />
+                    <p><span class="text-info">{{cupcake.flavor}}</span> </p>
+                </div>
+            </div>     
+        {% endif %}
+        {% endfor %}
+    </ul>
+
+    <form>
+        <div class="d-flex justify-content-center align-items-center">
+        
+        <div>
+            <label > Flavor</label>
+            <input name="flavor" id="flavor" class="col-md-8">
+        </div>
+        <div>
+            <label > Size</label>
+            <input name="size" id="size" class="col-md-8">
+        </div>
+        <div>
+            <label > Rating</label>
+            <input name="rating" id="rating" class="col-md-8">
+        </div>
+        <div>
+            <label > Image</label>
+            <input name="image" id="image" class="col-md-8">
+        </div>
+        <button class="btn  btn-success " type="submit">Add Cupcake</button>
+        
+        </div>
+    </form>
+    
+{% endblock %}
