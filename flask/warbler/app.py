@@ -164,27 +164,35 @@ def users_show(user_id):
                 .all())
     likes = [message.id for message in user.likes]
 
+    print(likes)
+
     return render_template('users/show.html', user=user, messages=messages)
 
 
-@app.route('/messages/<int:message_id>/like', methods=['POST'])
-def add_like(message_id):
+
+@app.route('/messages/like/<int:message_id>', methods=['POST'])
+def message_like(message_id):
     """Toggle a liked message for the currently-logged-in user."""
 
     if not g.user:
         flash("Access unauthorized.", "danger")
         return redirect("/")
+       
     like_msg = Message.query.get_or_404(message_id)
     user_likes = g.user.likes
+    
 
     if like_msg in user_likes:
         g.user.likes = [like for like in user_likes if like != like_msg]
+              
     else:
         g.user.likes.append(like_msg)
-
     db.session.commit()
 
-    return redirect("/")
+    return redirect(f"/messages/{message_id}")
+     
+    
+
 
 
 
@@ -338,9 +346,8 @@ def messages_show(message_id):
     """Show a message."""
 
     msg = Message.query.get(message_id)
-    
-    
-    return render_template('messages/show.html', message=msg)
+        
+    return render_template('messages/show.html', message=msg, likes=[l.id for l in g.user.likes])
     
 
 

@@ -36,10 +36,14 @@
             <span class="text-muted">{{ message.timestamp.strftime('%d %B %Y') }}</span>
             
             {% if g.user.id != message.user.id %}
+            
             <form method="POST"
-                        action="/users/like/{{ message.id }}">
-
+                        action="/messages/like/{{ message.id }}">
+                        {% if message.id in likes %}
+                        <button class="btn btn-primary">Unike</button>
+                        {% else%}
                         <button class="btn btn-primary">Like</button>
+                        {% endif %}
                   </form>
             {% endif %}
           </div>
