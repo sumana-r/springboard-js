@@ -24,6 +24,7 @@
                         action="/users/stop-following/{{ message.user.id }}">
                     <button class="btn btn-primary">Unfollow</button>
                   </form>
+                  
                 {% else %}
                   <form method="POST" action="/users/follow/{{ message.user.id }}">
                     <button class="btn btn-outline-primary btn-sm">Follow</button>
@@ -33,6 +34,14 @@
             </div>
             <p class="single-message">{{ message.text }}</p>
             <span class="text-muted">{{ message.timestamp.strftime('%d %B %Y') }}</span>
+            
+            {% if g.user.id != message.user.id %}
+            <form method="POST"
+                        action="/users/like/{{ message.id }}">
+
+                        <button class="btn btn-primary">Like</button>
+                  </form>
+            {% endif %}
           </div>
         </li>
       </ul>
