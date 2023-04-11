@@ -177,7 +177,7 @@ def message_like(message_id):
     if not g.user:
         flash("Access unauthorized.", "danger")
         return redirect("/")
-       
+   
     like_msg = Message.query.get_or_404(message_id)
     user_likes = g.user.likes
     

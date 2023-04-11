@@ -7,6 +7,7 @@
 
 import os
 from unittest import TestCase
+from bs4 import BeautifulSoup
 
 from models import db, connect_db, Message, User
 
@@ -47,7 +48,11 @@ class MessageViewTestCase(TestCase):
         self.testuser = User.signup(username="testuser",
                                     email="test@test.com",
                                     password="testuser",
-                                    image_url=None)
+                                    image_url=None,
+                                    header_image_url=None,
+                                    bio=None,
+                                    location=None
+                                    )
 
         db.session.commit()
 
@@ -71,3 +76,69 @@ class MessageViewTestCase(TestCase):
 
             msg = Message.query.one()
             self.assertEqual(msg.text, "Hello")
+
+    def test_loggedout_user_add_message(self):
+        """Is Unauthorized user can add a message?"""
+
+        # Since we need to change the session to mimic logging in,
+        # we need to use the changing-session trick:
+        with self.client as c:
+            with c.session_transaction() as sess:
+                sess[CURR_USER_KEY] = 896765
+
+            resp = c.post("/messages/new", data={"text": "Hello"}, follow_redirects=True)
+            self.assertEqual(resp.status_code, 200)
+            self.assertIn("Access unauthorized", str(resp.data))
+            
+    def test_delete_message(self):
+        """Can use delete a message?"""
+
+        # Since we need to change the session to mimic logging in,
+        # we need to use the changing-session trick:
+
+        msgid = 1111
+        msg = Message(
+            id = msgid,
+            text="Test Message",
+            user_id=self.testuser.id
+        )
+
+        
+        db.session.add(msg)
+        db.session.commit()
+        
+        with self.client as c:
+            with c.session_transaction() as sess:
+                sess[CURR_USER_KEY] = self.testuser.id
+
+            resp = c.post(f"/messages/{msgid}/delete", follow_redirects=True)
+            self.assertEqual(resp.status_code, 200)
+
+            msgs = Message.query.get(msgid)
+            self.assertIsNone(msgs)
+    
+    def test_loggedout_user_delete_message(self):
+        """Is unauthorized user can delete a message?"""
+
+        # Since we need to change the session to mimic logging in,
+        # we need to use the changing-session trick:
+
+        msgid = 1112
+        msg = Message(
+            id = msgid,
+            text="Test Message",
+            user_id=self.testuser.id
+        )
+
+        
+        db.session.add(msg)
+        db.session.commit()
+     
+
+
+        with self.client as c:
+            resp = c.post(f"/messages/{msgid}/delete", follow_redirects=True)
+            self.assertEqual(resp.status_code, 200)
+            self.assertIn("Access unauthorized", str(resp.data))
+            testmsg = Message.query.get(msgid)
+            self.assertIsNotNone(testmsg)
