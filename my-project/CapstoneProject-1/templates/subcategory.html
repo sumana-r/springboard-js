@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+  <div class="row justify-content-md-center">
+  <div class="col-md-7 col-lg-5">
+    <h2 class="text-center">SubCategory</h2>
+    <form method="POST" id="subcategory_form">
+      {{ form.hidden_tag() }}
+
+      {% for field in form if field.widget.input_type != 'hidden' %}
+        {% for error in field.errors %}
+          <span class="text-danger">{{ error }}</span>
+        {% endfor %}
+        <div class="form-group">
+        {{ field.label }}
+        {{ field(placeholder=field.label.text, class="form-control") }} <br>
+        </div>
+      {% endfor %}
+
+      <button class="btn btn-primary btn-lg btn-block">Add</button>
+    </form>
+    
+  </div>
+</div>
+
+{% endblock %}

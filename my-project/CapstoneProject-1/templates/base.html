@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Daily Expense Tracker</title>
+
+  <link rel="stylesheet"
+        href="https://unpkg.com/bootstrap/dist/css/bootstrap.css">
+  <script src="https://unpkg.com/jquery"></script>
+  <script src="https://unpkg.com/popper"></script>
+  <script src="https://unpkg.com/bootstrap"></script>
+
+  <link rel="stylesheet"
+        href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
+        <link rel="stylesheet" href="/static/style.css">
+       
+</head>
+
+<body class="{% block body_class %}{% endblock %}">
+    <nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark">
+        <div class="container-fluid">
+          
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-mdb-toggle="collapse"
+            data-mdb-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <i class="fas fa-bars"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav topnav">
+              <a class="nav-link active" aria-current="page" href="/">Home</a>
+              <a class="nav-link" href="/category">Category</a>
+              <a class="nav-link" href="/subcategory">SubCategory</a>
+              <a class="nav-link" href="/tags">Tag</a>
+              <a class="nav-link" href="/expense">Expense</a>
+              <a class="nav-link" href="/reports">Reports</a>
+              
+            </div> 
+            
+            
+            <div class="navbar-nav ms-auto topnav">
+                {% if not g.user %}    
+                <a class="nav-link" href="/signup">Sign up</a>
+                <a class="nav-link" href="/login">Log in</a>
+                {% else %}
+                <a class="nav-link anchor-cls">{{g.user.username}}</a>
+                <a class="nav-link" href="/logout">Logout</a>
+                {% endif %}
+                
+              </div>
+            
+          </div>
+        </div>
+      </nav>
+      
+           
+      
+
+   
+<div class="container">
+  
+  {% block content %}
+  {% endblock %}
+
+</div>
+</body>
+</html>

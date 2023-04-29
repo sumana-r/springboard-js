@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+  <div class="row justify-content-md-center">
+  <div class="col-md-7 col-lg-5">
+    <h2 class="text-center">Tag</h2>
+    <form method="POST" id="tag_form">
+      {{ form.hidden_tag() }}
+
+      {% for field in form if field.widget.input_type != 'hidden' %}
+        {% for error in field.errors %}
+          <span class="text-danger">{{ error }}</span>
+        {% endfor %}
+        <div class="form-group">
+        {{ field.label }}
+        {{ field(placeholder=field.label.text,style="list-style:none", class="form-control") }} <br>
+        </div>
+               
+      {% endfor %}
+      <a href="\tags\show"></a>
+      <button class="btn btn-primary btn-lg btn-block">Add</button>
+
+    </form>
+    <!-- <form method="GET" id="taglist_form"> -->
+        <!-- <h2 class="text-center">List of Tags</h2>
+        {% for tagslist in tagslists%}
+        
+          <p class="text-center">{{ tagslist.tagname }}</p>
+        
+        
+        {% endfor %} -->
+    <!-- </form> -->
+    
+  </div>
+</div>
+
+{% endblock %}
