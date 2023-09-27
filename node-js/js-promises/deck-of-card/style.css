@@ -1,0 +1,16 @@
+#game-container{
+background-color: green;
+}
+
+#get-card-btn {
+    margin: 0;
+    position: absolute;
+    left: 50%;
+}
+
+#card-cntr li{
+    list-style: none;
+    position: absolute;
+    left: 50%;
+    top: 10%
+}
